@@ -1,31 +1,20 @@
-// We require the Hardhat Runtime Environment explicitly here. This is optional
-// but useful for running the script in a standalone fashion through `node <script>`.
-//
-// You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
-// will compile your contracts, add the Hardhat Runtime Environment's members to the
-// global scope, and execute the script.
-const hre = require("hardhat");
+const { ethers, upgrades } = require("hardhat");
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
+  const CONTRACT_NAME_V1 = "OXXR";
+  const CONTRACT_NAME_V2 = "OXXRV2";
+  // Deploying
+  const FACTORY_V1 = await ethers.getContractFactory(CONTRACT_NAME_V1);
+  const CONTRACT_V1 = await upgrades.deployProxy(FACTORY_V1);
+  await CONTRACT_V1.deployed();
 
-  const lockedAmount = hre.ethers.utils.parseEther("1");
+  console.log("OXXR V1 deployed to:", CONTRACT_V1.address);
 
-  const Lock = await hre.ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+  // Upgrading proxy to V2
+  const FACTORY_V2 = await ethers.getContractFactory(CONTRACT_NAME_V2);
+  const CONTRACT_V2 = await upgrades.upgradeProxy(CONTRACT_V1.address, FACTORY_V2);
 
-  await lock.deployed();
-
-  console.log(
-    `Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
-  );
+  console.log( CONTRACT_NAME_V2 + " upgraded to:", CONTRACT_V2.address);
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+main();
