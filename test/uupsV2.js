@@ -40,18 +40,14 @@ describe("OXXR V2 TESTS:", function () {
     });
 
     it("Owner of an NFT can set a name to an NFT", async function () {
-        try {
-            const expectedValue = "Lorem Ipsum";
-            // contractV2["safeMint(address, uint256, string)"](owner.address, 12332511, "test");
-            await contractV2.safeMintWithName(addr1.address, 123456, "");
-            expect(await contractV2.balanceOf(addr1.address)).to.equal(1);
-            expect(await contractV2.ownerOf(123456)).to.equal(addr1.address);
-            console.log(await contractV2.getDiamondName(123456));
-            await contractV2.connect(addr1).setDiamondName(123456, "Lorem Ipsum");
-            expect(await contractV2.getDiamondName(123456)).to.equal(expectedValue);
-        } catch (error) {
-            console.log(error.message);
-        }
+        const expectedValue = "Lorem Ipsum";
+        // contractV2["safeMint(address, uint256, string)"](owner.address, 12332511, "test");
+        await contractV2.safeMintWithName(addr1.address, 123456, "");
+        expect(await contractV2.balanceOf(addr1.address)).to.equal(1);
+        expect(await contractV2.ownerOf(123456)).to.equal(addr1.address);
+        console.log(await contractV2.getDiamondName(123456));
+        await contractV2.connect(addr1).setDiamondName(123456, "Lorem Ipsum");
+        expect(await contractV2.getDiamondName(123456)).to.equal(expectedValue);
     });
 
     it("Only NFT Owner of the NFT can set a name", async function () {
@@ -76,10 +72,13 @@ describe("OXXR V2 TESTS:", function () {
     });
 
     it("NFT Owner can't set a name too long", async function () {
+        const LOREM_CHI= "天地玄黄 宇宙洪荒 日月盈昃 辰宿列张 寒来暑往 秋收冬藏 闰馀成岁 律吕调阳 云腾致雨 露结为霜 金生丽水 玉出昆冈 剑号巨阙 珠称夜光";
+        // 101 characters long lorem ipsum
+        const LOREM_LATIN= "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean ma";
         await contractV2.safeMintWithName(addr1.address, 123456, "");
         expect(await contractV2.balanceOf(addr1.address)).to.equal(1);
         expect(await contractV2.ownerOf(123456)).to.equal(addr1.address);
-        await expect(contractV2.connect(addr1).setDiamondName(123456, "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean ma")).to.be.reverted;
+        await expect(contractV2.connect(addr1).setDiamondName(123456, LOREM_LATIN )).to.be.reverted;
     });
 
     it("UPGRATABLE Profil can set BaseTokenURI", async function () {
