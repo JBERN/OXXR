@@ -1296,7 +1296,7 @@
             "label": "drops",
             "offset": 0,
             "slot": "301",
-            "type": "t_mapping(t_uint256,t_struct(Drop)3510_storage)",
+            "type": "t_mapping(t_uint256,t_struct(Drop)2158_storage)",
             "contract": "OXXRDrop",
             "src": "contracts/OXXRDrop.sol:51"
           },
@@ -1328,7 +1328,7 @@
             "label": "nft",
             "offset": 0,
             "slot": "305",
-            "type": "t_contract(MyNFTInterface)3444",
+            "type": "t_contract(MyNFTInterface)2092",
             "contract": "OXXRDrop",
             "src": "contracts/OXXRDrop.sol:57"
           }
@@ -1358,7 +1358,7 @@
             "label": "bytes32",
             "numberOfBytes": "32"
           },
-          "t_contract(MyNFTInterface)3444": {
+          "t_contract(MyNFTInterface)2092": {
             "label": "contract MyNFTInterface",
             "numberOfBytes": "20"
           },
@@ -1374,11 +1374,11 @@
             "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)",
             "numberOfBytes": "32"
           },
-          "t_mapping(t_uint256,t_struct(Drop)3510_storage)": {
+          "t_mapping(t_uint256,t_struct(Drop)2158_storage)": {
             "label": "mapping(uint256 => struct OXXRDrop.Drop)",
             "numberOfBytes": "32"
           },
-          "t_mapping(t_uint256,t_struct(Level)3482_storage)": {
+          "t_mapping(t_uint256,t_struct(Level)2130_storage)": {
             "label": "mapping(uint256 => struct OXXRDrop.Level)",
             "numberOfBytes": "32"
           },
@@ -1386,7 +1386,7 @@
             "label": "string",
             "numberOfBytes": "32"
           },
-          "t_struct(Drop)3510_storage": {
+          "t_struct(Drop)2158_storage": {
             "label": "struct OXXRDrop.Drop",
             "members": [
               {
@@ -1433,7 +1433,7 @@
               },
               {
                 "label": "levels",
-                "type": "t_mapping(t_uint256,t_struct(Level)3482_storage)",
+                "type": "t_mapping(t_uint256,t_struct(Level)2130_storage)",
                 "offset": 0,
                 "slot": "7"
               },
@@ -1446,7 +1446,7 @@
             ],
             "numberOfBytes": "288"
           },
-          "t_struct(Level)3482_storage": {
+          "t_struct(Level)2130_storage": {
             "label": "struct OXXRDrop.Level",
             "members": [
               {

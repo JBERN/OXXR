@@ -10,4 +10,5 @@ cache
 artifacts
 
 .vs
+*.code-workspace
 
